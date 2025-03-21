@@ -6,7 +6,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 // const API_END_POINT = "http://localhost:3512/api/v1/restaurant";
-const API_END_POINT: string = "http://3.230.139.78:3000//api/v1/restaurant";
+const API_END_POINT: string = "http://54.147.110.174:3000//api/v1/restaurant";
 axios.defaults.withCredentials = true;
 
 export const useRestaurantStore = create<RestaurantState>()(

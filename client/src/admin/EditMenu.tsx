@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
 import { useMenuStore } from "@/store/useMenuStore";
 import { MenuItem } from "@/types/restaurantType";
-import { Loader2 } from "lucide-react";
 import {
   Dispatch,
   FormEvent,
@@ -37,7 +36,7 @@ const EditMenu = ({
     image: undefined,
   });
   const [error, setError] = useState<Partial<MenuFormSchema>>({});
-  const {loading, editMenu} = useMenuStore();
+  const { editMenu } = useMenuStore();
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
@@ -131,14 +130,10 @@ const EditMenu = ({
             {error && <span className="text-xs font-medium text-red-600">{error.image?.name}</span>}
           </div>
           <DialogFooter className="mt-5">
-            {loading ? (
-              <Button disabled className="bg-orange hover:bg-hoverOrange">
-                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
+          
+            
               <Button className="bg-orange hover:bg-hoverOrange">Submit</Button>
-            )}
+          
           </DialogFooter>
         </form>
       </DialogContent>

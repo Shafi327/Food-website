@@ -4,7 +4,7 @@ import axios from "axios";
 import { LoginInputState, SignupInputState } from "@/schema/userSchema";
 import { toast } from "sonner";
 
-const API_END_POINT = "http://3.230.139.78:3000/api/v1/user";
+const API_END_POINT = "http://54.147.110.174:3000/api/v1/user";
 axios.defaults.withCredentials = true;
 
 type User = {

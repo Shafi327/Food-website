@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, LockKeyholeIcon } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
-    const loading =  false;
+    const handleResetPassword = () => {
+        // Add logic to handle password reset
+        console.log("Password reset for:", newPassword);
+    };
 
   return (
     <div className="flex items-center justify-center min-h-screen w-full">
@@ -23,15 +25,11 @@ const ResetPassword = () => {
             placeholder="Enter your new password"
             className="pl-10"
             />
-            <LockKeyholeIcon className="absolute inset-y-2 left-2 text-gray-600 pointer-events-none"/>
+                <Button onClick={handleResetPassword} className="bg-orange hover:bg-hoverOrange">Reset Password</Button>
         </div>
-        {
-            loading ? (
-                <Button disabled className="bg-orange hover:bg-hoverOrange"><Loader2 className="mr-2 h-4 w-4 animate-spin"/> Please wait</Button>
-            ) : (
+       
                 <Button className="bg-orange hover:bg-hoverOrange">Reset Password</Button>
-            )
-        }
+       
         <span className="text-center">
             Back to{" "}
             <Link to="/login" className="text-blue-500">Login</Link>

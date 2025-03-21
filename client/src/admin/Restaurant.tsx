@@ -6,7 +6,6 @@ import {
   restaurantFromSchema,
 } from "@/schema/restaurantSchema";
 import { useRestaurantStore } from "@/store/useRestaurantStore";
-import { Loader2 } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 
 const Restaurant = () => {
@@ -20,7 +19,6 @@ const Restaurant = () => {
   });
   const [errors, setErrors] = useState<Partial<RestaurantFormSchema>>({});
   const {
-    loading,
     restaurant,
     updateRestaurant,
     createRestaurant,
@@ -193,18 +191,13 @@ const Restaurant = () => {
               </div>
             </div>
             <div className="my-5 w-fit">
-              {loading ? (
-                <Button disabled className="bg-orange hover:bg-hoverOrange">
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Please wait
-                </Button>
-              ) : (
+            
                 <Button className="bg-orange hover:bg-hoverOrange">
                   {restaurant
                     ? "Update Your Restaurant"
                     : "Add Your Restaurant"}
                 </Button>
-              )}
+            
             </div>
           </form>
         </div>

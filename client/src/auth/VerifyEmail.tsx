@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUserStore } from "@/store/useUserStore";
-import { Loader2 } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const inputRef = useRef<any>([]);
-  const { loading, verifyEmail } = useUserStore();
+  const { verifyEmail } = useUserStore();
   const navigate = useNavigate();
   const handleChange = (index: number, value: string) => {
     if (/^[a-zA-Z0-9]$/.test(value) || value === "") {
@@ -68,19 +67,11 @@ const VerifyEmail = () => {
               />
             ))}
           </div>
-          {loading ? (
-            <Button
-              disabled
-              className="bg-orange hover:bg-hoverOrange mt-6 w-full"
-            >
-              <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-              Please wait
-            </Button>
-          ) : (
+          
             <Button className="bg-orange hover:bg-hoverOrange mt-6 w-full">
               Verify
             </Button>
-          )}
+          
         </form>
       </div>
     </div>
