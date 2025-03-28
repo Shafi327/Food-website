@@ -136,14 +136,13 @@ jobs:
 
       - name: Build and Push Backend Image
         run: |
-          ls -la 
-          docker build -t shafi627/docker-deploy-cicd ./backend
-          docker push shafi627/docker-deploy-cicd
+          docker build -t shafi627/backend:latest backend/
+          docker push shafi627/backend:latest
 
       - name: Build and Push Frontend Image
         run: |
-          docker build -t shafi627/docker-deploy-cicd frontend/
-          docker push shafi627/docker-deploy-cicd
+          docker build -t shafi627/frontend:latest frontend/
+          docker push shafi627/frontend:latest
 
       - name: SSH into EC2 and Deploy
         uses: appleboy/ssh-action@master
@@ -154,6 +153,6 @@ jobs:
           script: |
             # Navigate to your project folder
             cd /home/ubuntu/myapp
-            docker pull shafi627/docker-deploy-cicd
-            docker pull shafi627/docker-deploy-cicd
+            docker pull shafi627/backend:latest
+            docker pull shafi627/frontend:latest
             docker-compose up -d
