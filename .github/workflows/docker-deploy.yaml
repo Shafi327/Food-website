@@ -136,7 +136,8 @@ jobs:
 
       - name: Build and Push Backend Image
         run: |
-          docker build -t shafi627/docker-deploy-cicd backend/
+          ls -la 
+          docker build -t shafi627/docker-deploy-cicd ./backend
           docker push shafi627/docker-deploy-cicd
 
       - name: Build and Push Frontend Image
