@@ -136,8 +136,8 @@ jobs:
 
       - name: Build and Push Backend Image
         run: |
-          docker build -t shafi627/backend:latest ./backend
-          docker push shafi627/backend:latest
+          docker build -t shafi627/backend:latest ./server
+          docker push shafi627/server:latest
 
       - name: Build and Push Frontend Image
         run: |
