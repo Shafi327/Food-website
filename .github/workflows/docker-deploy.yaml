@@ -53,12 +53,21 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
+    # Debug: Check if Dockerfile is present
+    - name: Debug - List files
+      run: ls -lah
+
     # Step 1: Build and Push Docker Image to Docker Hub
     - name: Build and Push Docker Image
       run: |
+        if [ ! -f Dockerfile ]; then
+          echo "ERROR: Dockerfile not found in $(pwd)"
+          exit 1
+        fi
+
         docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-deploy-cicd .
         echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/docker-deploy-cicd
 
     # Step 2: Set up SSH Key for connecting to AWS EC2
     - name: Set up SSH Key
@@ -72,14 +81,14 @@ jobs:
     - name: Deploy via SSH
       run: |
         ssh ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-        # Navigate to the application directory or create it
-        mkdir -p /home/ubuntu/myapp && cd /home/ubuntu/myapp
+        # Navigate to the application directory
+        cd /home/ubuntu/myapp
 
         # Stop and remove any existing containers
         docker-compose down
 
         # Remove old image
-        docker rmi -f ${{ secrets.DOCKER_USERNAME }}/myapp:latest || true
+        docker rmi -f ${{ secrets.DOCKER_USERNAME }}/docker-deploy-cicd || true
 
         # Pull latest image from Docker Hub
         docker pull ${{ secrets.DOCKER_USERNAME }}/docker-deploy-cicd
