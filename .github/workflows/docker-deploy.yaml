@@ -39,7 +39,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # cd /home/ubuntu/myapp
+            cd /home/ubuntu/myapp
             docker pull shafi627/backend:latest
             docker pull shafi627/frontend:latest
             docker-compose up -d
