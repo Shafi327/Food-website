@@ -38,9 +38,25 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          # script: |
+          #   cd /home/ubuntu/myapp
+          #   docker pull shafi627/backend:latest
+          #   docker pull shafi627/frontend:latest
+          #   docker-compose up -d
+          
           script: |
-            # cd /home/ubuntu/myapp
+            cd /home/ubuntu/myapp
+            
+            # Ensure docker-compose.yml exists before proceeding
+            if [ ! -f docker-compose.yml ]; then
+              echo "Error: docker-compose.yml not found!"
+              exit 1
+            fi
+
+            # Pull latest images
             docker pull shafi627/backend:latest
             docker pull shafi627/frontend:latest
-            docker-compose up -d
 
+            # Restart containers using docker-compose
+            docker-compose down
+            docker-compose up -d --force-recreate
