@@ -1,14 +1,14 @@
 services:
-   db:
-      image: mongo:latest
-      container_name: mongodb
-      ports:
-         - "27017:27017"
-      environment:
-         MONGO_INITDB_ROOT_USERNAME: user
-         MONGO_INITDB_ROOT_PASSWORD: password
-         MONGO_INITDB_DATABASE: db
-         MONGO_INITDB_DATABASEHOST: db
+   # db:
+   #    image: mongo:latest
+   #    container_name: mongodb
+   #    ports:
+   #       - "27017:27017"
+   #    environment:
+   #       MONGO_INITDB_ROOT_USERNAME: user
+   #       MONGO_INITDB_ROOT_PASSWORD: password
+   #       MONGO_INITDB_DATABASE: db
+   #       MONGO_INITDB_DATABASEHOST: db
       
    server:
       container_name: backend
@@ -16,8 +16,8 @@ services:
          context: ./server
       env_file:
          -  ./server/.env
-      depends_on:
-         - db
+      # depends_on:
+      #    - db
       ports:  
          - "3000:3000"
 
