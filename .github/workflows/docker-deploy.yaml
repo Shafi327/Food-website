@@ -141,7 +141,7 @@ jobs:
 
       - name: Build and Push Frontend Image
         run: |
-          docker build -t shafi627/frontend:latest frontend/
+          docker build -t shafi627/frontend:latest ./client
           docker push shafi627/frontend:latest
 
       - name: SSH into EC2 and Deploy
