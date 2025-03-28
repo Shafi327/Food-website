@@ -38,16 +38,16 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          # script: |
-          #   cd /home/ubuntu/myapp
-          #   docker pull shafi627/backend:latest
-          #   docker pull shafi627/frontend:latest
-          #   docker-compose up -d
           script: |
-              cd /home/ubuntu/myapp
-              pwd
-              ls -la
-              docker pull ***/backend:latest
-              docker pull ***/frontend:latest
-              docker-compose up -d
+            cd /home/shafi-ullah/Documents/deployment/food-app-yt-main
+            docker pull shafi627/backend:latest
+            docker pull shafi627/frontend:latest
+            docker-compose up -d
+          # script: |
+          #     cd /home/ubuntu/myapp
+          #     pwd
+          #     ls -la
+          #     docker pull ***/backend:latest
+          #     docker pull ***/frontend:latest
+          #     docker-compose up -d
 
